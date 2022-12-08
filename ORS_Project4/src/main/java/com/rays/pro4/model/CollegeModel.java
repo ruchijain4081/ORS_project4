@@ -268,6 +268,11 @@ public class CollegeModel {
 		}
 		log.debug("Model update End");
 	}
+	/**
+     * search record from database  
+	 * @return list
+	 * @throws ApplicationException
+	 */
 
 	public List search(CollegeBean bean) throws ApplicationException {
 		return search(bean, 0, 0);
@@ -345,7 +350,12 @@ public class CollegeModel {
 		log.debug("model search End");
 		return list;
 	}
-
+	/**
+	 * list of records from database
+	 * @return list
+	 * @throws ApplicationException
+	 */
+	
 	public List list() throws ApplicationException {
 		return list(0, 0);
 	}

@@ -267,6 +267,13 @@ public class CourseModel {
 			 }
 			 log.debug("Model update End");
 		 }
+		 /**
+			 * search record from database
+			 * @param bean
+			 * @return list
+			 * @throws ApplicationException
+			 */
+		
 		 public List search(CourseBean bean) throws DatabaseException, ApplicationException {
 			 return search(bean,0,0);
 		 }
@@ -329,7 +336,12 @@ public class CourseModel {
 			 log.debug("MOdel search End");
 			 return list;
 		 }
-		 
+		 /**
+			 * list of records from database
+			 * @return list
+			 * @throws ApplicationException
+			 */
+		
 		 public List list() throws Exception {
 			 return list(0,0);
 		 }

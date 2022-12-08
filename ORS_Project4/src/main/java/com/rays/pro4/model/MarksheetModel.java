@@ -148,6 +148,12 @@ public class MarksheetModel {
 		}
 		log.debug("Model delete End");
 	}
+	 /**
+	 * find record by rollno from database
+	 * @param rollno
+	 * @return bean
+	 * @throws ApplicationException
+	 */
 
 	public MarksheetBean findByRollNo(String rollNo) throws ApplicationException {
 		log.debug("Model findByRollNo Started");
@@ -230,6 +236,12 @@ public class MarksheetModel {
 		log.debug("Model findByPK End");
 		return bean;
 	}
+	 /**
+		 * update record in database
+		 * @param bean
+		 * @throws ApplicationException
+		 * @throws DuplicateRecordException
+		 */
 
 	public void update(MarksheetBean bean) throws ApplicationException, DuplicateRecordException {
 
@@ -416,6 +428,13 @@ public class MarksheetModel {
 		return list;
 
 	}
+	/**
+	 * Meritlist of records  from database
+	 * @param pageNo
+	 * @param pageSize
+	 * @return list
+	 * @throws ApplicationException
+	 */
 
 	public List getMeritList(int pageNo, int pageSize) throws ApplicationException {
 		log.debug("model MeritList Started");

@@ -37,7 +37,12 @@
 
 	<br>
 	<br>
-
+<style>a:link{
+text-decoration:none;
+}
+a:hover{
+text-decoration:underline;
+}</style>
 	<h1 align="center">
 		<font size="10px" color="red"> <a
 			href="<%=ORSView.WELCOME_CTL%>">Online Result System</a></font>

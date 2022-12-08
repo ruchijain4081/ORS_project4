@@ -24,6 +24,12 @@ import com.rays.pro4.util.JDBCDataSource;
 public class StudentModel {
 
 	private static Logger log = Logger.getLogger(StudentModel.class);
+	/**
+	 * create non bussiness primary key
+	 * @return integer
+	 * @throws DatabaseException
+	 */
+
 
 	public Integer nextPK() throws DatabaseException {
 
@@ -51,6 +57,12 @@ public class StudentModel {
 		return pk + 1;
 
 	}
+	/**
+	 * add record in database
+	 * @param bean
+	 * @throws ApplicationException
+	 *  @throws DuplicateRecordException
+	 */
 
 	public long add(StudentBean bean) throws ApplicationException, DuplicateRecordException {
 		log.debug("Model add Started");
@@ -109,7 +121,12 @@ public class StudentModel {
 		log.debug("Model add End");
 		return pk;
 	}
-
+	/**
+	 * delete record in database
+	 * @param bean
+	 * @throws ApplicationException
+	 */
+	
 	public void delete(StudentBean bean) throws ApplicationException {
 
 		log.debug("Model delete Started");
@@ -135,6 +152,12 @@ public class StudentModel {
 		}
 		log.debug("Model delete End");
 	}
+	 /**
+		 * find record by emailid from database
+		 * @param email
+		 * @return bean
+		 * @throws ApplicationException
+		 */
 
 	public StudentBean findByEmailId(String Email) throws ApplicationException {
 		log.debug("Model findBy Email Started");
@@ -173,6 +196,12 @@ public class StudentModel {
 		log.debug("Model findBy Email End");
 		return bean;
 	}
+	 /**
+	 * find record by pk from database
+	 * @param pk
+	 * @return bean
+	 * @throws ApplicationException
+	 */
 
 	public StudentBean findByPK(long pk) throws ApplicationException {
 		log.debug("Model findByPK Started");
@@ -209,6 +238,12 @@ public class StudentModel {
 		log.debug("Model findByPK End");
 		return bean;
 	}
+	 /**
+	 * update record in database
+	 * @param bean
+	 * @throws ApplicationException
+	 * @throws DuplicateRecordException
+	 */
 
 	public void Update(StudentBean bean) throws ApplicationException, DuplicateRecordException {
 		log.debug("Model Update Started");
@@ -260,11 +295,25 @@ public class StudentModel {
 		}
 		log.debug("Model update End");
 	}
+	 /**
+	 * search record from database
+	 * @param bean
+	 * @return list
+	 * @throws ApplicationException
+	 */
 
 	public List search(StudentBean bean) throws ApplicationException {
 		return search(bean, 0, 0);
 	}
-
+	 /**
+		 * search record from database
+		 * @param bean
+		 * @param pageNo
+		 * @param PageSize
+		 * @return list
+		 * @throws ApplicationException
+		 */
+		
 	public List search(StudentBean bean, int pageNo, int pageSize) throws ApplicationException {
 		log.debug("Model search Started");
 		StringBuffer sql = new StringBuffer("SELECT * FROM ST_STUDENT WHERE 1=1");
@@ -341,11 +390,23 @@ public class StudentModel {
 		log.debug("Model search End");
 		return list;
 	}
-
+	/**
+	 * list of records from database
+	 * @return list
+	 * @throws ApplicationException
+	 */
+	
 	public List list() throws ApplicationException {
 		return list(0, 0);
 	}
-
+	/**
+	 * list of records from database
+	 * @param pageNo
+	 * @param pageSize
+	 * @return list
+	 * @throws ApplicationException
+	 */
+	
 	public List list(int pageNo, int pageSize) throws ApplicationException {
 		log.debug("Model list Started");
 		ArrayList list = new ArrayList();

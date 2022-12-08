@@ -26,7 +26,13 @@ public class SubjectModel {
 	
 	private static Logger log= Logger.getLogger(SubjectModel.class);
 	
-	
+	/**
+	 * create non bussiness primary key
+	 * @return integer
+	 * @throws DatabaseException
+	 */
+
+
 	private Integer nextPK() throws DatabaseException {
 		   log.debug("Model nextpk Started");
 		   Connection conn=null;
@@ -50,7 +56,13 @@ public class SubjectModel {
 		   log.debug("Model next pk End" );
 		   return pk = pk+1;
 	   }
-	
+	/**
+	 * add record in database
+	 * @param bean
+	 * @throws ApplicationException
+	 * @throws DuplicateRecordException
+	 */
+
 	public long add(SubjectBean bean) throws ApplicationException, DuplicateRecordException {
 		   log.debug("Model add Started");
 		   Connection conn=null;
@@ -103,6 +115,12 @@ public class SubjectModel {
 		return pk;
 		  
 	   }
+	/**
+	 * delete record in database
+	 * @param bean
+	 * @throws ApplicationException
+	 */
+	
 	 public void Delete(SubjectBean bean) throws ApplicationException {
 		   log.debug("Model Delete Started");
 		   Connection conn = null;
@@ -129,7 +147,13 @@ public class SubjectModel {
 		   log.debug("Model delete End");
 		   
 	   }
-	 
+	 /**
+		 * update record in database
+		 * @param bean
+		 * @throws ApplicationException
+		 * @throws DuplicateRecordException
+		 */
+
 	 public void update(SubjectBean bean) throws ApplicationException, DuplicateRecordException {
 		 log.debug("model update Started");
 		 Connection conn=null;
@@ -177,7 +201,13 @@ public class SubjectModel {
 		 log.debug("Model upodate End");
 		 
 	 }
-	 
+	 /**
+		 * find record by name from database
+		 * @param name
+		 * @return bean
+		 * @throws ApplicationException
+		 */
+	
 	 public SubjectBean findByName(String name) throws ApplicationException {
 		 log.debug("Model findByName Started");
 		 StringBuffer sql=new StringBuffer("SELECT * FROM ST_SUBJECT WHERE SUBJECT_NAME=?");
@@ -214,6 +244,13 @@ public class SubjectModel {
 		 return bean;
 				 
 	 } 
+	 /**
+		 * find record by pk from database
+		 * @param pk
+		 * @return bean
+		 * @throws ApplicationException
+		 */
+	
 	 public SubjectBean FindByPK(long pk) throws ApplicationException {
 		 log.debug("Model FindByPK Started");
 		 StringBuffer sql=new StringBuffer("SELECT * FROM ST_SUBJECT WHERE ID=?");
@@ -229,9 +266,9 @@ public class SubjectModel {
 				 bean = new SubjectBean();
 				 bean.setId(1);
 				 bean.setSubjectName(rs.getString(2));
-				 bean.setDescription(rs.getString(3));
-				 bean.setCourseId(rs.getLong(4));
-				 bean.setCourseName(rs.getString(5));
+				 bean.setDescription(rs.getString(5));
+				 bean.setCourseId(rs.getLong(3));
+				 bean.setCourseName(rs.getString(4));
 				 bean.setCreatedBy(rs.getString(6));
 				 bean.setModifiedBy(rs.getString(7));
 				 bean.setCreatedDatetime(rs.getTimestamp(8));
@@ -250,12 +287,27 @@ public class SubjectModel {
 	 }
 	 
 	 
-	 
+	 /**
+		 * search record from database
+		 * @param bean
+		 * @return list
+		 * @throws ApplicationException
+		 */
+	
 	 
 	 
 	 public List search( SubjectBean bean) throws DatabaseException, ApplicationException {
 		 return search(bean,0,0);
 	 }
+	 /**
+		 * search record from database
+		 * @param bean
+		 * @param pageNo
+		 * @param PageSize
+		 * @return list
+		 * @throws ApplicationException
+		 */
+		
 	 public List search(SubjectBean bean,int pageNo,int pageSize) throws DatabaseException, ApplicationException {
 		 log.debug("Model search Started");
 		 StringBuffer sql= new StringBuffer("Select * from ST_SUBJECT where true");
@@ -295,9 +347,9 @@ public class SubjectModel {
 				 bean=new SubjectBean();
 				 bean.setId(rs.getLong(1));
 					bean.setSubjectName(rs.getString(2));
-					bean.setDescription(rs.getString(3));
-					bean.setCourseId(rs.getLong(4));
-					bean.setCourseName(rs.getString(5));
+					bean.setDescription(rs.getString(5));
+					bean.setCourseId(rs.getLong(3));
+					bean.setCourseName(rs.getString(4));
 					bean.setCreatedBy(rs.getString(6));
 					bean.setModifiedBy(rs.getString(7));
 					bean.setCreatedDatetime(rs.getTimestamp(8));
@@ -315,15 +367,24 @@ public class SubjectModel {
 		 return list;
 	 }
 	 
-	 
-	                                                                             
-	 
-	 
+	 /**
+		 * list of records from database
+		 * @return list
+		 * @throws ApplicationException
+		 */
+		
 	 
 	 public List list() throws Exception {
 		 return list(0,0);
 	 }
-	
+	 /**
+		 * list of records from database
+		 * @param pageNo
+		 * @param pageSize
+		 * @return list
+		 * @throws ApplicationException
+		 */
+		
 	  public List list(int pageNo,int pageSize) throws Exception{
 	  
 	  log.debug("model list started");

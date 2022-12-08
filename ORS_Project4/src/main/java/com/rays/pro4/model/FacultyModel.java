@@ -99,17 +99,17 @@ public class FacultyModel {
 			   System.out.println("666666666666");
 			   PreparedStatement pstmt = conn.prepareStatement("INSERT INTO ST_FACULTY VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			   	pstmt.setInt(1, pk);
-			   	pstmt.setString(2, bean.getFirstName());
-			    pstmt.setString(3, bean.getLastName());
-			    pstmt.setString(4, bean.getGender());
-			    pstmt.setString(5, bean.getEmailId());
-			    pstmt.setString(6, bean.getMobileNo());
-			    pstmt.setLong(7, bean.getCollegeId());
-			    pstmt.setString(8, bean.getCollegeName());
-			    pstmt.setLong(9, bean.getCourseId());
-			    pstmt.setString(10, bean.getCourseName());
-			    pstmt.setDate(11, new java.sql.Date(bean.getDob().getTime()));
-			    pstmt.setLong(12,bean.getSubjectId());
+			   	pstmt.setLong(2, bean.getCollegeId());
+			   	pstmt.setLong(3,bean.getSubjectId());
+			    pstmt.setLong(4, bean.getCourseId());
+			   	pstmt.setString(5, bean.getFirstName());
+			    pstmt.setString(6, bean.getLastName());
+			    pstmt.setString(7, bean.getGender());
+			    pstmt.setDate(8, new java.sql.Date(bean.getDob().getTime()));
+			    pstmt.setString(9, bean.getEmailId());
+			    pstmt.setString(10, bean.getMobileNo());
+			    pstmt.setString(11, bean.getCourseName());
+	            pstmt.setString(12, bean.getCollegeName());
 			    pstmt.setString(13, bean.getSubjectName());
 			    pstmt.setString(14, bean.getCreatedBy());
 			    pstmt.setString(15, bean.getModifiedBy());
@@ -167,6 +167,12 @@ public class FacultyModel {
 		}
 		log.debug("Model delete End");
 	}
+	 /**
+	 * update record in database
+	 * @param bean
+	 * @throws ApplicationException
+	 * @throws DuplicateRecordException
+	 */
 
 	public void update(FacultyBean bean) throws ApplicationException, DuplicateRecordException {
 		log.debug("model update Started");
@@ -238,17 +244,17 @@ public class FacultyModel {
 			while (rs.next()) {
 				bean = new FacultyBean();
 				bean.setId(rs.getLong(1));
-				bean.setFirstName(rs.getString(2));
-				bean.setLastName(rs.getString(3));
-				bean.setGender(rs.getString(4));
-				bean.setEmailId(rs.getString(5));
-				bean.setMobileNo(rs.getString(6));
-				bean.setCollegeId(rs.getLong(7));
-				bean.setCollegeName(rs.getString(8));
-				bean.setCourseId(rs.getLong(9));
-				bean.setCourseName(rs.getString(10));
-				bean.setDob(rs.getDate(11));
-				bean.setSubjectId(rs.getLong(12));
+				bean.setCollegeId(rs.getLong(2));
+				bean.setSubjectId(rs.getLong(3));
+				bean.setCourseId(rs.getLong(4));
+				bean.setFirstName(rs.getString(5));
+				bean.setLastName(rs.getString(6));
+				bean.setGender(rs.getString(7));
+				bean.setDob(rs.getDate(8));
+				bean.setEmailId(rs.getString(9));
+				bean.setMobileNo(rs.getString(10));
+				bean.setCourseName(rs.getString(11));
+				bean.setCollegeName(rs.getString(12));
 				bean.setSubjectName(rs.getString(13));
 				bean.setCreatedBy(rs.getString(14));
 				bean.setModifiedBy(rs.getString(15));
@@ -265,7 +271,13 @@ public class FacultyModel {
 		log.debug("Model findByPK End");
 		return bean;
 	}
-
+	 /**
+		 * find record by emailid from database
+		 * @param email
+		 * @return bean
+		 * @throws ApplicationException
+		 */
+		
 	public FacultyBean findByEmailId(String Email) throws ApplicationException {
 		log.debug("Model findBy Email Started");
 		StringBuffer sql = new StringBuffer("SELECT * FROM ST_FACULTY WHERE EMAIL_id=?");
@@ -279,23 +291,23 @@ public class FacultyModel {
 			while (rs.next()) {
 				bean = new FacultyBean();
 				bean.setId(rs.getLong(1));
-				bean.setFirstName(rs.getString(2));
-				bean.setLastName(rs.getString(3));
-				bean.setGender(rs.getString(4));
-				bean.setEmailId(rs.getString(5));
-				bean.setMobileNo(rs.getString(6));
-				bean.setCollegeId(rs.getLong(7));
-				bean.setCollegeName(rs.getString(8));
-				bean.setCourseId(rs.getLong(9));
-				bean.setCourseName(rs.getString(10));
-				bean.setDob(rs.getDate(11));
-				bean.setSubjectId(rs.getLong(12));
+				bean.setCollegeId(rs.getLong(2));
+				bean.setSubjectId(rs.getLong(3));
+				bean.setCourseId(rs.getLong(4));
+				bean.setFirstName(rs.getString(5));
+				bean.setLastName(rs.getString(6));
+				bean.setGender(rs.getString(7));
+				bean.setDob(rs.getDate(8));
+				bean.setEmailId(rs.getString(9));
+				bean.setMobileNo(rs.getString(10));
+				bean.setCourseName(rs.getString(11));
+				bean.setCollegeName(rs.getString(12));
 				bean.setSubjectName(rs.getString(13));
 				bean.setCreatedBy(rs.getString(14));
 				bean.setModifiedBy(rs.getString(15));
 				bean.setCreatedDatetime(rs.getTimestamp(16));
 				bean.setModifiedDatetime(rs.getTimestamp(17));
-			}
+	}
 			rs.close();
 		} catch (Exception e) {
 			log.error("Database Exception..", e);
@@ -307,7 +319,12 @@ public class FacultyModel {
 		log.debug("Model findBy Email End");
 		return bean;
 	}
-
+	/**
+	 * list of records from database
+	 * @return list
+	 * @throws ApplicationException
+	 */
+	
 	public List list() throws ApplicationException {
 		return list(0, 0);
 	}
@@ -338,23 +355,23 @@ public class FacultyModel {
 			while (rs.next()) {
 				FacultyBean bean = new FacultyBean();
 				bean.setId(rs.getLong(1));
-				bean.setFirstName(rs.getString(2));
-				bean.setLastName(rs.getString(3));
-				bean.setGender(rs.getString(4));
-				bean.setEmailId(rs.getString(5));
-				bean.setMobileNo(rs.getString(6));
-				bean.setCollegeId(rs.getLong(7));
-				bean.setCollegeName(rs.getString(8));
-				bean.setCourseId(rs.getLong(9));
-				bean.setCourseName(rs.getString(10));
-				bean.setDob(rs.getDate(11));
-				bean.setSubjectId(rs.getLong(12));
+				bean.setCollegeId(rs.getLong(2));
+				bean.setSubjectId(rs.getLong(3));
+				bean.setCourseId(rs.getLong(4));
+				bean.setFirstName(rs.getString(5));
+				bean.setLastName(rs.getString(6));
+				bean.setGender(rs.getString(7));
+				bean.setDob(rs.getDate(8));
+				bean.setEmailId(rs.getString(9));
+				bean.setMobileNo(rs.getString(10));
+				bean.setCourseName(rs.getString(11));
+				bean.setCollegeName(rs.getString(12));
 				bean.setSubjectName(rs.getString(13));
 				bean.setCreatedBy(rs.getString(14));
 				bean.setModifiedBy(rs.getString(15));
 				bean.setCreatedDatetime(rs.getTimestamp(16));
 				bean.setModifiedDatetime(rs.getTimestamp(17));
-				list.add(bean);
+	            list.add(bean);
 			}
 			rs.close();
 		} catch (Exception e) {
@@ -366,6 +383,12 @@ public class FacultyModel {
 		log.debug("Model list End");
 		return list;
 	}
+	/**
+	 * search record from database
+	 * @param bean
+	 * @return list
+	 * @throws ApplicationException
+	 */
 
 	public List search(FacultyBean bean) throws ApplicationException {
 		return search(bean, 0, 0);
@@ -442,23 +465,23 @@ public class FacultyModel {
 			while (rs.next()) {
 				bean = new FacultyBean();
 				bean.setId(rs.getLong(1));
-				bean.setFirstName(rs.getString(2));
-				bean.setLastName(rs.getString(3));
-				bean.setGender(rs.getString(4));
-				bean.setEmailId(rs.getString(5));
-				bean.setMobileNo(rs.getString(6));
-				bean.setCollegeId(rs.getLong(7));
-				bean.setCollegeName(rs.getString(8));
-				bean.setCourseId(rs.getLong(9));
-				bean.setCourseName(rs.getString(10));
-				bean.setDob(rs.getDate(11));
-				bean.setSubjectId(rs.getLong(12));
+				bean.setCollegeId(rs.getLong(2));
+				bean.setSubjectId(rs.getLong(3));
+				bean.setCourseId(rs.getLong(4));
+				bean.setFirstName(rs.getString(5));
+				bean.setLastName(rs.getString(6));
+				bean.setGender(rs.getString(7));
+				bean.setDob(rs.getDate(8));
+				bean.setEmailId(rs.getString(9));
+				bean.setMobileNo(rs.getString(10));
+				bean.setCourseName(rs.getString(11));
+				bean.setCollegeName(rs.getString(12));
 				bean.setSubjectName(rs.getString(13));
 				bean.setCreatedBy(rs.getString(14));
 				bean.setModifiedBy(rs.getString(15));
 				bean.setCreatedDatetime(rs.getTimestamp(16));
 				bean.setModifiedDatetime(rs.getTimestamp(17));
-				list.add(bean);
+	            list.add(bean);
 			}
 			rs.close();
 		} catch (Exception e) {

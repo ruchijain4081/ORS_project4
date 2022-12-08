@@ -29,6 +29,12 @@ import com.rays.pro4.util.JDBCDataSource;
 
 public class UserModel {
 	private static Logger log = Logger.getLogger(UserModel.class);
+	/**
+	 * create non bussiness primary key
+	 * @return integer
+	 * @throws DatabaseException
+	 */
+
 
 	public int nextPK() throws DatabaseException {
 
@@ -55,6 +61,12 @@ public class UserModel {
 		return pk + 1;
 
 	}
+	/**
+	 * add record in database
+	 * @param bean
+	 * @throws ApplicationException
+	 *  @throws DuplicateRecordException
+	 */
 
 	public long add(UserBean bean) throws ApplicationException, DuplicateRecordException {
 		log.debug("Model add Started");
@@ -122,7 +134,12 @@ public class UserModel {
 		return pk;
 
 	}
-
+	/**
+	 * delete record in database
+	 * @param bean
+	 * @throws ApplicationException
+	 */
+	
 	public void delete(UserBean bean) throws ApplicationException {
 		log.debug("Model delete start");
 		String sql = "DELETE FROM ST_USER WHERE ID=?";
@@ -147,6 +164,12 @@ public class UserModel {
 		}
 		log.debug("Model Delete End");
 	}
+	 /**
+		 * find record by loginid from database
+		 * @param login
+		 * @return bean
+		 * @throws ApplicationException
+		 */
 
 	public UserBean findByLogin(String login) throws ApplicationException {
 		log.debug("Model findByLohin Started");
@@ -191,6 +214,12 @@ public class UserModel {
 		log.debug("Model findby login end");
 		return bean;
 	}
+	 /**
+	 * find record by pk from database
+	 * @param pk
+	 * @return bean
+	 * @throws ApplicationException
+	 */
 
 	public UserBean findByPK(long pk) throws ApplicationException {
 		log.debug("Model findBy PK start");
@@ -235,6 +264,12 @@ public class UserModel {
 		log.debug("Method Find By PK end");
 		return bean;
 	}
+	 /**
+	 * update record in database
+	 * @param bean
+	 * @throws ApplicationException
+	 * @throws DuplicateRecordException
+	 */
 
 	public void update(UserBean bean) throws ApplicationException, DuplicateRecordException {
 		log.debug("Model Update Start");
@@ -283,11 +318,25 @@ public class UserModel {
 		}
 		log.debug("Model Update End ");
 	}
+	 /**
+	 * search record from database
+	 * @param bean
+	 * @return list
+	 * @throws ApplicationException
+	 */
 
 	public List search(UserBean bean) throws ApplicationException {
 		return search(bean, 0, 0);
 	}
-
+	 /**
+		 * search record from database
+		 * @param bean
+		 * @param pageNo
+		 * @param PageSize
+		 * @return list
+		 * @throws ApplicationException
+		 */
+		
 	public List search(UserBean bean, int pageNo, int pageSize) throws ApplicationException {
 		log.debug("Model Search Start");
 		StringBuffer sql = new StringBuffer("SELECT * FROM ST_USER WHERE 1=1");
@@ -373,6 +422,12 @@ public class UserModel {
 		return list;
 
 	}
+	 /**
+	 * search record by roleId from database
+	 * @param bean
+	 * @return list
+	 * @throws ApplicationException
+	 */
 
 	public List getRoles(UserBean bean) throws ApplicationException {
 		log.debug("Model GetRoles Start");
@@ -419,6 +474,14 @@ public class UserModel {
 
 	}
 
+	/** 
+	 * Authenticate the user data from database
+	   * @param emailid
+		 * @param password
+		 * @return bean
+		 * @throws ApplicationException
+		
+	 * */
 	public UserBean authenticate(String login, String password) throws ApplicationException {
 		log.debug("Model authenticate Started");
 		StringBuffer sql = new StringBuffer("SELECT * FROM ST_USER WHERE LOGIN =? AND PASSWORD =?");
@@ -463,11 +526,23 @@ public class UserModel {
 		return bean;
 
 	}
-
+	/**
+	 * list of records from database
+	 * @return list
+	 * @throws ApplicationException
+	 */
+	
 	public List list() throws ApplicationException {
 		return list(0, 0);
 	}
-
+	/**
+	 * list of records from database
+	 * @param pageNo
+	 * @param pageSize
+	 * @return list
+	 * @throws ApplicationException
+	 */
+	
 	public List list(int pageNo, int pageSize) throws ApplicationException {
 		log.debug("Model list Started");
 		ArrayList list = new ArrayList();
@@ -518,7 +593,15 @@ public class UserModel {
 		log.debug("Model list End");
 		return list;
 	}
-
+	/**
+	 * change password of an record in database and send mail
+	 * @param id
+	 * @param old password
+	 * @param newPassword
+	 * @return boolean
+	 * @throws ApplicationException
+	 */
+	
 	public boolean changePassword(Long id, String oldPassword, String newPassword)
 			throws ApplicationException, RecordNotFoundException {
 
@@ -561,7 +644,13 @@ public class UserModel {
 		log.debug("Model changePassword End");
 		return flag;
 	}
-
+	/**
+	 * register user in database and send mail
+	 * @param bean
+	 * @return long
+	 * @throws ApplicationException
+	 */
+	
 	public long registerUser(UserBean bean) throws ApplicationException, DuplicateRecordException {
 		log.debug("Model add Started");
 		long pk = add(bean);
@@ -581,7 +670,13 @@ public class UserModel {
 		EmailUtility.sendMail(msg);
 		return pk;
 	}
-
+	/**
+	 * get password of an record from database and send mail
+	 * @param login Id
+	 * @return boolean
+	 * @throws ApplicationException
+	 */
+	
 	public boolean forgetPassword(String login) throws ApplicationException, RecordNotFoundException {
 		UserBean userData = findByLogin(login);
 		boolean flag = false;

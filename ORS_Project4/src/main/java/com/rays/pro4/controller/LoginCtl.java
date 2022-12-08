@@ -64,11 +64,11 @@ public class LoginCtl extends BaseCtl {
 			request.setAttribute("password", PropertyReader.getValue("error.require", "Password"));
 			pass = false;
 		}
-			else if(!DataValidator.isPassword(password)&!DataValidator.isPasswordLength(password)) {
-				request.setAttribute("password", PropertyReader.getValue("error.password", "Password"));
-				pass = false;
-			}
-		
+		/*
+		 * else if(!DataValidator.isPassword(password)&!DataValidator.isPasswordLength(
+		 * password)) { request.setAttribute("password",
+		 * PropertyReader.getValue("error.password", "Password")); pass = false; }
+		 */
 
 		log.debug("LoginCtl Method validate Ended");
 

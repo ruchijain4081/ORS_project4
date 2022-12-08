@@ -23,7 +23,13 @@ import com.rays.pro4.util.JDBCDataSource;
 public class RoleModel {
 
 private static Logger log=Logger.getLogger(RoleModel.class);
-	
+/**
+ * create non bussiness primary key
+ * @return integer
+ * @throws DatabaseException
+ */
+
+
 	public Integer nextPK()throws DatabaseException{
 		log.debug("Model nextPK Started");
 		Connection conn=null;
@@ -49,7 +55,13 @@ private static Logger log=Logger.getLogger(RoleModel.class);
 		return pk+1;
 	}
 	
-	
+	/**
+	 * add record in database
+	 * @param bean
+	 * @throws ApplicationException
+	 *  @throws DuplicateRecordException
+	 */
+
 	
 	public long add(RoleBean bean)throws ApplicationException,DuplicateRecordException{
 		
@@ -97,7 +109,12 @@ private static Logger log=Logger.getLogger(RoleModel.class);
 			log.debug("Modal add End");
 			return pk;
 	}
-
+	/**
+	 * delete record in database
+	 * @param bean
+	 * @throws ApplicationException
+	 */
+	
 	
 	public void delete(RoleBean bean)throws ApplicationException{
 		
@@ -127,6 +144,13 @@ private static Logger log=Logger.getLogger(RoleModel.class);
 		log.debug("Modal delete Started");
 	}
 	
+
+	 /**
+	 * find record by name from database
+	 * @param name
+	 * @return bean
+	 * @throws ApplicationException
+	 */
 	
 	public RoleBean findByName(String name)throws ApplicationException{
 		log.debug("Modal findBy EmailId Started");
@@ -163,6 +187,12 @@ private static Logger log=Logger.getLogger(RoleModel.class);
 			
 	}
 	
+	 /**
+	 * find record by pk from database
+	 * @param pk
+	 * @return bean
+	 * @throws ApplicationException
+	 */
 	
 	
 	public RoleBean findByPK(long pk)throws ApplicationException{
@@ -200,12 +230,16 @@ private static Logger log=Logger.getLogger(RoleModel.class);
 		return bean;
 	}
 	
-	
-	
+	 /**
+	 * update record in database
+	 * @param bean
+	 * @throws ApplicationException
+	 * @throws DuplicateRecordException
+	 */
 	 public void update(RoleBean bean) throws ApplicationException,
      DuplicateRecordException {
- log.debug("Model update Started");
- Connection conn = null;
+     log.debug("Model update Started");
+     Connection conn = null;
 
 		/*
 		 * RoleBean duplicataRole = findByName(bean.getName()); // Check if updated Role
@@ -243,11 +277,25 @@ private static Logger log=Logger.getLogger(RoleModel.class);
  }
  log.debug("Model update End");
 }
+	 /**
+		 * search record from database
+		 * @param bean
+		 * @return list
+		 * @throws ApplicationException
+		 */
 	
 	public List search(RoleBean bean)throws ApplicationException{
 		return search(bean);
 	}
-	
+	 /**
+		 * search record from database
+		 * @param bean
+		 * @param pageNo
+		 * @param PageSize
+		 * @return list
+		 * @throws ApplicationException
+		 */
+		
 	public List search(RoleBean bean,int pageNo,int pageSize)throws ApplicationException{
 		log.debug("Model search Started");
 		StringBuffer sql=new StringBuffer("SELECT*FROM ST_ROLE WHERE 1=1");
@@ -299,11 +347,23 @@ private static Logger log=Logger.getLogger(RoleModel.class);
 		log.debug("Model search End");
 		return list;
 	}
+	/**
+	 * list of records from database
+	 * @return list
+	 * @throws ApplicationException
+	 */
 	
 	public List list()throws ApplicationException{
 		return list(0,0);
 	}
 	
+	/**
+	 * list of records from database
+	 * @param pageNo
+	 * @param pageSize
+	 * @return list
+	 * @throws ApplicationException
+	 */
 	
 	
 	public List list(int pageNo,int pageSize)throws ApplicationException{

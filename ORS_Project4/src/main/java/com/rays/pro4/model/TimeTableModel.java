@@ -26,6 +26,12 @@ import com.rays.pro4.util.JDBCDataSource;
 public class TimeTableModel {
 
 	private static Logger log = Logger.getLogger(TimeTableModel.class);
+	/**
+	 * create non bussiness primary key
+	 * @return integer
+	 * @throws DatabaseException
+	 */
+
 
 	public Integer nextPK() throws DatabaseException {
 		log.debug("Model nextPK Started");
@@ -49,6 +55,12 @@ public class TimeTableModel {
 		log.debug("Model nextPK End");
 		return pk + 1;
 	}
+	/**
+	 * add record in database
+	 * @param bean
+	 * @throws ApplicationException
+	 * @throws DuplicateRecordException
+	 */
 
 	public long add(TimeTableBean bean) throws ApplicationException, DuplicateRecordException {
 		log.debug("Model add Started");
@@ -112,7 +124,12 @@ public class TimeTableModel {
 		return pk;
 
 	}
-
+	/**
+	 * delete record in database
+	 * @param bean
+	 * @throws ApplicationException
+	 */
+	
 	public void delete(TimeTableBean bean) throws ApplicationException {
 		log.debug("Model delete Started");
 		Connection conn = null;
@@ -138,6 +155,12 @@ public class TimeTableModel {
 		}
 		log.debug("Model delete End");
 	}
+	 /**
+	 * update record in database
+	 * @param bean
+	 * @throws ApplicationException
+	 * @throws DuplicateRecordException
+	 */
 
 	public void update(TimeTableBean bean) throws ApplicationException, DuplicateRecordException {
 		log.debug("Model update Started");
@@ -197,6 +220,12 @@ public class TimeTableModel {
 		}
 		log.debug("Model update End");
 	}
+	 /**
+	 * find record by pk from database
+	 * @param pk
+	 * @return bean
+	 * @throws ApplicationException
+	 */
 
 	public TimeTableBean findByPK(long pk) throws ApplicationException {
 		log.debug("Model findBypk started");
@@ -234,11 +263,23 @@ public class TimeTableModel {
 		log.debug("Model findBypk End");
 		return bean;
 	}
-
+	/**
+	 * list of records from database
+	 * @return list
+	 * @throws ApplicationException
+	 */
+	
 	public List list() throws Exception {
 		return list(0, 0);
 	}
-
+	/**
+	 * list of records from database
+	 * @param pageNo
+	 * @param pageSize
+	 * @return list
+	 * @throws ApplicationException
+	 */
+	
 	public List list(int pageNo, int pageSize) throws Exception {
 		log.debug("model list Started");
 		ArrayList list = new ArrayList();
@@ -286,11 +327,26 @@ public class TimeTableModel {
 		log.debug("Model list End");
 		return list;
 	}
+	/**
+	 * search record from database
+	 * @param bean
+	 * @return list
+	 * @throws ApplicationException
+	 */
+	
 
 	public List search(TimeTableBean bean) throws ApplicationException {
 		return search(bean, 0, 0);
 	}
-
+	 /**
+		 * search record from database
+		 * @param bean
+		 * @param pageNo
+		 * @param PageSize
+		 * @return list
+		 * @throws ApplicationException
+		 */
+		
 	public List search(TimeTableBean bean, int pageNo, int pageSize) throws ApplicationException {
 		log.debug("Model search started");
 		StringBuffer sql = new StringBuffer("select * from ST_timetable where 1=1");
@@ -356,6 +412,15 @@ public class TimeTableModel {
 		return list;
 
 	}
+	 /**
+		 * find record by CourseId, SubjectId, semester from database
+		 * @param CourseId
+		 * @param SubjectId
+		 * @param semester
+		 * @return bean
+		 * @throws ApplicationException
+		 */
+
 
 	public TimeTableBean checkBycss(long CourseId, long SubjectId, String semester) throws ApplicationException {
 		Connection conn = null;
@@ -397,6 +462,16 @@ public class TimeTableModel {
 		// log.debug("Timetable Model list method End");
 		return bean;
 	}
+	 /**
+	 * find record by CourseId, ExamDate, semester from database
+	 * @param CourseId
+	 * @param ExamDate
+	 * @param semester
+	 * @return bean
+	 * @throws ApplicationException
+	 */
+
+
 
 	public TimeTableBean checkBycds(long CourseId, String Semester, Date ExamDate) throws ApplicationException {
 		StringBuffer sql = new StringBuffer(
@@ -441,6 +516,14 @@ public class TimeTableModel {
 		return bean;
 
 	}
+	 /**
+		 * find record by CourseId, SubjectId, semester from database
+		 * @param CourseId
+		 * @param SubjectId
+		 * @param semester
+		 * @return bean
+		 * @throws ApplicationException
+		 */
 
 	public static TimeTableBean checkBysemester(long CourseId, long SubjectId, String semester,
 			java.util.Date ExamDAte) {
@@ -480,6 +563,13 @@ public class TimeTableModel {
 		}
 		return bean;
 	}
+	 /**
+	 * find record by CourseId, ExamDate from database
+	 * @param CourseId
+	 * @param ExamDate
+	 * @return bean
+	 * @throws ApplicationException
+	 */
 
 	public static TimeTableBean checkByCourseName(long CourseId, java.util.Date ExamDate) {
 		Connection conn = null;

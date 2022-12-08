@@ -58,15 +58,15 @@
                 <tr>
                     <th align="left">Gender</th>
                     <td>
-                    <input type=" text" name="gender" value="<%= DataUtility.getStringData(bean.getGender())%>">
-                     <%--    <%
+                  <%-- <input type=" text" name="gender" value="<%= DataUtility.getStringData(bean.getGender())%>"> --%>
+                        <%
                             HashMap map = new HashMap();
                             map.put("M", "Male");
                             map.put("F", "Female");
 
                             String htmlList = HTMLUtility.getList("gender", bean.getGender(),
-                                    map);
-                        %> <%=htmlList%> --%>
+                                    map,request);
+                        %> <%=htmlList%>
                     </td>
                 </tr>
                 <tr>

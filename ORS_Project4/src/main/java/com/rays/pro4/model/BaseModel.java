@@ -186,6 +186,7 @@ public abstract class BaseModel implements  Serializable,DropdownListBean {
 	}
 	
 	/**
+	 * 
 	 * @throws Exception
 	 */
 	public void updateModifiedInfo()throws Exception{
